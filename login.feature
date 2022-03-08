@@ -1,75 +1,65 @@
 #language: pt
 
+Funcionalidade: Configurar produto
+1 - Meus clientes devem escolher a cor, tamanho
+e quantidade obrigatoriamente
+2 - Devem permitir apenas 10 produtos por venda
+3 - Quando clicar no botão "limpar" deve voltar ao estado original
 
-Funcionalidade: Configurar Produto
-Como cliente do site EBAC-Shop
-Quero configuar meu produto de acordo com meu tamanho e gosto
-E escolher a qauntidade
-Para inserir no carrinho
+Cenário: 1 - Critérios Obrigatórios
+Dado que o cliente escolher seu produto
+Quando terminar de selecionar cor, tamanho e quantidade
+Então deve acrescentar o produto no carrinho
 
-Cenário: Seleções
-Dado que eu acesse a página do produto no site EBAC-Shop
-Quando eu acessar a página vou poder selecionar os tamanhos, gostos da minha preferência 
-E quantidade
-Então deve exibir o produto no carrinho com as preferências
+Cenário: 2 - Limite de Vendas
+Dado que o cliente seleciona muito produtos
+Quando atingir 10 produtos 
+Então deve apresentar uma mensagem "Limite de peso do carrinho"
 
-Cenário: Espaço do Carrinho
-Dado que eu acrescente mais que 10 produtos no carrinho
-Quando o 11 produto for acrescentado 
-E igual ou menor que 10
-Então deve exibir a mensagem "Carrinho Cheio"
+Cenário: 3 - Botão "Limpar"
+Dado que o cliente resolva excluir todos os produtos
+Quando clicar o botão "Limpar"
+Então deve excluir todos os produtos do carrinho
 
-Cenário: Limpar Carrinho
-Dado que o cliente não queria mais os produtos do carrinho
-Quando apertar no botão "Limpar Carrino"
-Então deve exibir o carrinho de compras sem itens
 
------------------------------------------------------------------------------------------
+Funcionalidade: Login na plataforma
+1 - Ao inserir dados deve ser direcionado 
+para a tela de checkout
+2 - Ao inserir um dos campos inválidos deve exibir
+uma mensagem de alerta "Usuário ou senha inválidos"
 
-Funcionalidade: Login na Plataforma
-Como cliente do site EBAC-Shop
-Quero fazer o login(Autenticação) na plataforma
-Para visualizar meus pediddos
-
-Cenário: Dados Válidos
-Dado que eu acesse a página "Meus pedidos"
-Quando eu digitar usuario "eduh@ebac.com"
-E senha "eduh123"
+Cenário: 1 - Direcionamento Tela Checkout
+Dado que o cliente finalizar sua compra sem cadastro
+Quando inserir seus dados cadastrais
 Então deve ser direcionado para a tela de checkout
 
-Cenário: Dados Inválidos
-Dado que eu acesse a página "Meus Pedidos"
-Quando eu digitar "eduh@ebac.com"
-E senha "eduh321"
-Então deve aparecer uma mensagem de alerta "Usuário ou senha inválidos"
-
-------------------------------------------------------------------------------------------
-
-Funcionalidade: Tela de cadastro - Checkout
-Como cliente da EBAC-Shop
-Quero fazer concluir meu cadastro 
-Para finalizar minha compra
-
-Cenário: Dados Cadastrais
-Dado que para concluir meu cadastro
-Quando preencher todos os campos  marcados com o asterisco 
-Então deve ser obrigatório que todos os campos marcados com asterisco
-sejam preenchidos corretamente para finalizar o cadastro
-
-Cenário: Campo de E-mail
-Dado que eu acesse o login 
-Quando eu digitar usuário "eduh@ebac.com"
-E o fomarto for inválido de "@"
-Então deve exibir uma mensagem de erro "E-mail inválido"
-
-Cenário: Dados Cadastrais
-Dado que para concluir meu cadastro
-Quando não preencher os campos  marcados com o asterisco 
-E deve ser obrigatório que todos os campos marcados com asterisco
-sejam preenchidos corretamente para finalizar o cadastro 
-Então deve exibir uma mensagem de alerta "Campos não preenchidos"
-E apresentar os campos que faltam para preencher
+Cenário: 2 - Inserir campos inválidos
+Dado que o cliente inserir seu senha ou email
+Quando efetuar o Login
+Então deve exibir uma mensagem de alerta "Usuário ou
+senha inválidos"
 
 
+Funcionalidade: Tela de Cadastro - Checkout
+1 - Clientes devem ser cadastrados com todos os campos
+marcados com asterisco
+2 - Não deve permitir em-mails com formato inválido. 
+Deve inserir uma mensagem de alerta
+3 - Ao tentar cadastrar com campos vazios, deve exibir
+mensagem de alerta
 
 
+Cenário: 1 - Campos marcados com asteriscos
+Dado que o cliente ao preecher seus dados cadastrais
+Quando aparecer campos marcados com asteriscos "*"
+Então o cliente deve preencher o campo marcado obrigatoriamente
+
+Cenário: 2 - E-mails com formato inválido
+Dado que o cliente ao preecher seu dados cadastrais
+Quando preencher seu e-mail com formato inválido "@"
+Então deve aparecer uma mensagem de alerta "Formato de e-mail inválido"
+
+Cenário: 3 - Cadastros incompletos
+Dado que o cliente não preencher todos os campos para finalizar cadastro
+Quando tentar finalizar o cadastro
+Entao deve exibir uma mensagem de alerta "Campos não preenchidos"
